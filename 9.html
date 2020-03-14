@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    if (x < 0) {
+        return false
+    }
+    const str = x + ''
+    const length = str.length
+    let flag = true
+    for(let i = 0; i < Math.ceil(length / 2); i++) {
+        if(i > Math.ceil(length / 2) || str[i] !== str[length - 1 - i]) {
+            return false
+        }
+    }
+    return flag
+    
+};
+console.log(isPalindrome(121))
+console.log(isPalindrome(-121))
+console.log(isPalindrome(1212))
+  </script>
+</body>
+</html>

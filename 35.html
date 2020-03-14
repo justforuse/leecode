@@ -1,0 +1,35 @@
+<script>
+
+  /**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+//  console.log(searchInsert([1,3,5,6], 2))
+  var searchInsert = function (nums, target) {
+    const len = nums.length
+    if(len === 0) {
+      return 0
+    }
+    if(nums[len - 1] < target) {
+      return len
+    }
+    let left = 0
+    let right = len - 1
+    while(left < right) {
+      let mid = left + Math.floor((right - left) / 2)
+      if(nums[mid] < target) {
+        left = mid + 1
+      } else {
+        right = mid
+      }
+    }
+    return left
+  };
+
+  console.log(searchInsert([1,3,5,6], 5)) // 2
+  console.log(searchInsert([1,3,5,6], 2)) // 1
+  console.log(searchInsert([1, 3, 5, 6], 7)) // 4
+  console.log(searchInsert([1,3,5,6], 0)) // 0
+  console.log(searchInsert([1,3], 2)) // 1
+</script>

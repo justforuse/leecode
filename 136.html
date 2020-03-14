@@ -1,0 +1,23 @@
+<script>
+
+  /**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+    let res = 0
+    let cur = 1
+    let len = nums.length
+    while(cur < len) {
+      if(nums[cur] === nums[res]) {
+        res = res + 1
+        cur = res + 1
+      } else {
+        cur++
+      }
+    }
+    return nums[res]
+};
+
+console.log(singleNumber([2,2,1]))
+</script>

@@ -1,0 +1,36 @@
+<script>
+
+  /**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+  if(strs.length === 0) {
+    return ''
+  }
+  let i = 0
+  let char = ''
+  let res = ''
+  let same = true
+  while(same) {
+    if(i >= strs[0].length)  {
+      same = false
+      break
+    }
+    char = strs[0][i]
+    strs.forEach(str => {
+      if(str[i] !== char) {
+        same = false
+        return
+      }
+    })
+    same && (res += char)
+    i++
+  }
+
+  return res
+};
+
+const res = longestCommonPrefix(["a"])
+console.log(res)
+</script>

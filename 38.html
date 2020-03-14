@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const vals = ['1']
+function say(value) {
+    const arr = value.split('')
+    let res = ''
+    for(let i = 0;i < arr.length; i++) {
+        let count = 1
+        while(arr[i] === arr[i + 1]) {
+            i ++
+            count ++
+        }
+        res += `${count}${arr[i]}`
+    }
+    return res
+}
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function(n) {
+    if (n === 1) {
+        return vals[0]
+    }
+    let i = 1
+    while(i < n) {
+        vals[i] = say(vals[i - 1])
+        i++
+    }
+    return vals[i - 1]
+    
+};
+countAndSay(2)
+
+  </script>
+</body>
+</html>

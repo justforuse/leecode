@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    const map = new Map()
+    map.set(')', '(')
+    map.set(']', '[')
+    map.set('}', '{')
+    const startArr = ['(', '[', '{']
+    /**
+     * @param {string} s
+     * @return {boolean}
+     */
+    var isValid = function (s) {
+      const arr = s.split('')
+      const t = []
+      for (let i = 0; i < arr.length; i++) {
+        if (startArr.includes(arr[i])) {
+          t.push(arr[i])
+        } else {
+          if(t[t.length - 1] === map.get(arr[i])) {
+            t.pop()
+          } else {
+            return false
+          }
+        }
+      }
+      return t.length === 0
+    };
+    console.log(isValid('()'))
+    console.log(isValid('()[]{)'))
+    console.log(isValid('([)]'))
+  </script>
+</body>
+
+</html>

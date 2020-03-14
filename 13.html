@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const map = new Map()
+    map.set('I', 1)
+    map.set('V', 5)
+    map.set('X', 10)
+    map.set('L', 50)
+    map.set('C', 100)
+    map.set('D', 500)
+    map.set('M', 1000)
+    const charArr = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
+    let getValue = function (char) {
+      return map.get(char)
+    }
+
+    // IX true
+    // II false
+    let shouldMinus = function (pre, next) {
+      if (!next) {
+        return false
+      }
+      return charArr.indexOf(pre) < charArr.indexOf(next)
+    }
+    /**
+     * @param {string} s
+     * @return {number}
+     */
+    var romanToInt = function (s) {
+      const arr = s.split('')
+      let initVal = 0
+      for (let i = 0; i < arr.length; i++) {
+        if (shouldMinus(arr[i], arr[i + 1])) {
+          initVal -= getValue(arr[i])
+        } else {
+          initVal += getValue(arr[i])
+        }
+    }
+      return initVal
+    };
+    console.log(romanToInt('III'))
+    console.log(romanToInt('IV'))
+    console.log(romanToInt('XI'))
+    console.log(romanToInt('IX'))
+    console.log(romanToInt('LVIII'))
+    console.log(romanToInt('MCMXCIV'))
+
+  </script>
+</body>
+
+</html>

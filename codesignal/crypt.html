@@ -1,0 +1,26 @@
+<script>
+
+  function isCryptSolution(crypt, solution) {
+    const map = new Map(solution)
+    const res = []
+    for (let i = 0; i < crypt.length; i++) {
+      const str = crypt[i]
+      if (str.length !== 1 && map.get(str[0]) === '0') {
+        return false
+      }
+      res[i] = str.split('').reduce((prev, cur) => prev + map.get(cur), '')
+    }
+    console.log(res)
+    return Number(res[0]) + Number(res[1]) === +res[2]
+  }
+
+
+  const crypt =
+  ["A", 
+ "A", 
+ "A"]
+  const solution =
+  [["A","0"]]
+
+  console.log(isCryptSolution(crypt, solution))
+</script>

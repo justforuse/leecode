@@ -1,0 +1,35 @@
+<script>
+
+  /**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+let res = []
+function func(nodes) {
+  let lvl = []
+  let nextNodes = []
+  nodes.forEach(node => {
+    lvl.push(node.val)
+    node.left && nextNodes.push(node.left)
+    node.right && nextNodes.push(node.right)
+  })
+  res.push(lvl)
+  nextNodes.length && func(nextNodes)
+}
+var levelOrder = function(root) {
+    if(!root) {
+      return []
+    }
+    func([root])
+    return res
+};
+
+console.log(levelOrder({ val: 1, left: null, right: null}))
+</script>

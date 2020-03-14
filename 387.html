@@ -1,0 +1,33 @@
+<script>
+  /**
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function(s) {
+    if(!s) {
+      return -1
+    }
+    const arr = s.split('')
+    let len = arr.length
+    const map = new Map()
+    arr.forEach(char => {
+      let count = map.get(char)
+      if(!count) {
+        map.set(char, 1)
+      } else {
+        map.set(char, count + 1)
+      }
+    })
+    const keys = map.keys()
+    let length = map.size
+    let res = -1
+    for(let key of keys) {
+      if(map.get(key) === 1) {
+        return arr.indexOf(key)
+      }
+    }
+    return res
+};
+
+console.log(firstUniqChar("loveleetcode"))
+</script>
