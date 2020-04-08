@@ -1,0 +1,40 @@
+<script>
+  class List {
+    constructor(val) {
+      this.value = val
+      this.next = null
+    }
+  }
+
+  class Queue {
+    constructor() {
+      this.queue = undefined
+      this.q1 = undefined
+    }
+    push(data) {
+      if (!this.queue) {
+        this.queue = new List(data)
+        this.q1 = this.queue
+      } else {
+        this.q1.next = new List(data)
+        this.q1 = this.q1.next
+      }
+    }
+
+    shift() {
+      const val = this.queue.value
+      this.queue = this.queue.next
+      this.q1 = this.queue
+      return val
+    }
+  }
+
+  const queue = new Queue()
+  queue.push(1)
+  queue.push(2)
+  queue.push(3)
+  console.log(queue.shift())
+  console.log(queue.shift())
+  console.log(queue.shift())
+  console.log(queue.shift())
+</script>

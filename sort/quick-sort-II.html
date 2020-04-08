@@ -1,0 +1,38 @@
+<script>
+
+  function sort(arr, start, e) {
+    let end = typeof e === 'undefined' ? arr.length - 1 : e
+
+    if (start >= end) {
+      return;
+    }
+    let pos = getPos(arr, start, end);
+    sort(arr, start, pos - 1);
+    sort(arr, pos + 1, end);
+    return arr
+  }
+
+  function getPos(arr, start, end) {
+    let pos = start - 1;
+    let pivot = arr[end];
+    let i = start;
+    while (i < end) {
+      if (arr[i] < pivot) {
+        pos++;
+        swap(arr, i, pos);
+      }
+      i++;
+    }
+    swap(arr, pos + 1, end);
+    return pos + 1;
+  }
+
+  function swap(arr, i, j) {
+    const t = arr[i];
+    arr[i] = arr[j];
+    arr[j] = t;
+  }
+
+  const res = sort([15, 12, 1, 2, 7, 9, 3, 8, 20], 0);
+  console.log(res)
+</script>
