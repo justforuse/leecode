@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function myFlat(arr, depth) {
+      if(depth <= 0 || !Array.isArray(arr)) {
+        return arr
+      }
+      let res = []
+      arr.forEach(item => {
+        res = res.concat(Array.isArray(item) ? myFlat(item, depth - 1) : item)
+      })
+      return res
+    }
+
+    function myFlat2(arr, depth) {
+      if(depth <= 0 || !Array.isArray(arr)) {
+        return arr
+      }
+      return arr.reduce((pre, cur) => {
+        return pre.concat(Array.isArray(cur) ? myFlat2(cur, depth -1) : cur)
+      }, [])
+    }
+
+    Array.prototype.flat3 = function(depth) {
+      let res = this
+      while(depth > 0) {
+        res = [].concat(...res)
+        depth --
+      }
+      return res
+    }
+    const data = [1,[2,[3,[4,5]]]]
+    const deep = 2
+    console.log(data.flat(deep))
+    console.log(myFlat(data, deep))
+    console.log(myFlat2(data, deep))
+    console.log(data.flat3(deep))
+  </script>
+</body>
+</html>

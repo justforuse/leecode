@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var letterCasePermutation = function (S) {
+      let res = [S[0].toUpperCase(), S[0].toLowerCase()]
+      // ['a', 'A'] => ['ab', 'aB', 'Ab', 'AB'] => ....
+      for(let i = 1;i<S.length;i++) {
+        let temp = []
+        res.forEach(str => {
+          temp.push(str.concat(S[i].toLowerCase()))
+          temp.push(str.concat(S[i].toUpperCase()))
+        })
+        res = temp
+      }
+      return Array.from(new Set([...res]))
+    };
+  </script>
+</body>
+
+</html>

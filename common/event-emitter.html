@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Emitter</title>
+</head>
+
+<body>
+  <script>
+    class EventEmitter {
+      constructor() {
+        this.events = {};
+      }
+      on(event, listener) {
+        if (typeof this.events[event] !== 'object') {
+          this.events[event] = [];
+        }
+        this.events[event].push(listener);
+        return () => this.removeListener(event, listener);
+      }
+      removeListener(event, listener) {
+        if (typeof this.events[event] === 'object') {
+          const idx = this.events[event].indexOf(listener);
+          if (idx > -1) {
+            this.events[event].splice(idx, 1);
+          }
+        }
+      }
+      emit(event, ...args) {
+        if (typeof this.events[event] === 'object') {
+          this.events[event].forEach(listener => listener.apply(this, args));
+        }
+      }
+      once(event, listener) {
+        const remove = this.on(event, (...args) => {
+          remove();
+          listener.apply(this, args);
+        });
+      }
+    };
+
+    function handler1() {
+      console.log('handle1...', arguments)
+    }
+
+    function handler2() {
+      console.log('handler2...', arguments)
+    }
+
+    function handler3(data) {
+      console.log('handler3...', data)
+    }
+    const EE = new EventEmitter()
+
+    EE.on('evt1', handler1)
+    EE.on('evt1', handler3)
+
+    EE.emit('evt1', 1,2,3)
+    EE.emit('evt1', 4,5)
+    EE.removeListener('evt1', handler1)
+
+    EE.emit('evt1', 6)
+
+    EE.once('evt2', handler2)
+
+    EE.emit('evt2')
+    EE.emit('evt2')
+
+  </script>
+</body>
+
+</html>

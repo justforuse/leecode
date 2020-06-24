@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ * [              
+ *  [1, 2, 3].  ==> [ 1 2 3 6 5 4]
+ *  [4, 5, 6]
+ * ]
+ */
+    var spiralOrder = function (matrix) {
+      if (!matrix || !matrix.length) {
+        return []
+      }
+      let top = 0
+      let right = matrix[0].length
+      let bottom = matrix.length
+      let left = 0
+
+      const res = []
+      while (true) {
+        // left -> right
+        for (let i = left; i < right; i++) {
+          res.push(matrix[top][i])
+        }
+        top += 1
+        if (top >= bottom) {
+          break
+        }
+        // top -> bottom
+        for (let j = top; j < bottom; j++) {
+          res.push(matrix[j][right - 1])
+        }
+        right -= 1
+        if (left >= right) {
+          break
+        }
+        // right -> left
+        for (let m = right - 1; m >= left; m--) {
+          res.push(matrix[bottom - 1][m])
+        }
+        bottom -= 1
+        if (bottom <= top) {
+          break
+        }
+        // bottom -> top
+        for (let n = bottom - 1; n >= top; n--) {
+          res.push(matrix[n][left])
+        }
+        left += 1
+        if (left >= right) {
+          break
+        }
+      }
+      return res
+    };
+
+    console.log(spiralOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+    console.log(spiralOrder([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]))
+  </script>
+</body>
+
+</html>

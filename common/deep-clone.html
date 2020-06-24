@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep clone</title>
+</head>
+<body>
+  <script>
+    function deepClone(origin) {
+      if(Array.isArray(origin)) {
+        return origin.map(item => deepClone(item))
+      }
+      if(Object.prototype.toString.call(origin) === '[object Object]') {
+        let res = {}
+        for(let key in origin) {
+          res[key] = deepClone(origin[key])
+        }
+        return res
+      }
+      return origin
+    }
+
+    const testObj = {
+      name: 'aaa',
+      address: [
+        {
+          name: 'beijing',
+          phone: 123456
+        },
+        {
+          name: 'hangzhou',
+          phone: 777888
+        }
+      ]
+    }
+    
+  </script>
+</body>
+</html>
